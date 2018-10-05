@@ -1,0 +1,47 @@
+#!/bin/sh
+# author : Kamil Betka
+# e-mail : betkakamil@gmail.com
+
+arr_start[0]="Good day to you partner! I'm Gheed and I can already tell that I'll be your best friend in this forsaken camp"
+arr_start[1]="Greetings, young Sorcerer. It is good to see more of your kind at work in the world these dark days"
+arr_start[2]="Hello, my friend. Stay awhile and listen..."
+arr_start[3]="Tyrael was a fool to have trusted me!"
+arr_start[4]="Hmm...You look like a sturdy adventurer."                         
+arr_start[5]="You've traveled far, only to return home to us, Barbarian."
+arr_start[6]="Hi there, I'm Charsi, the Blacksmith here in camp."
+arr_start[7]="You now speak to Ormus, good Paladin."
+arr_start[8]="Well, what the hell do you want? Oh, it's you. Uh, hi there."     
+
+
+arr_end[0]="Reign of Terror has ended."
+arr_end[1]="A hero's mistake was finally corrected."
+arr_end[2]="No one should ever be caged…"
+arr_end[3]="This ends the plague of Terror."
+arr_end[4]="My duty here is done."                         
+arr_end[5]="This cave has been purged of evil."
+arr_end[6]="Let the gate be opened!"
+arr_end[7]="Maybe now the world will have peace."
+arr_end[8]="It is good to know that the sun shines again." 
+
+rand_start=$[$RANDOM % ${#arr_start[@]}]
+rand_end=$[$RANDOM % ${#arr_end[@]}]  
+echo "-------------------------------------------"
+echo ${arr_start[$rand_start]}
+echo "-------------------------------------------"
+
+# Read user input, assign stdin to keyboard
+exec < /dev/tty
+
+while read -p "Does your commit message satisfy the rule ? [If applied, this commit will ...] (Y/n) " yn; do
+    case $yn in
+        [Yy] ) break;;
+        [Nn] ) echo "Please ensure the right commit messaged was added!"; exit 1;;
+        * ) echo "Please answer y (yes) or n (no):" && continue;
+    esac
+done
+
+echo "==========================================="
+echo ${arr_end[$rand_end]}
+echo "==========================================="
+
+exec <&-

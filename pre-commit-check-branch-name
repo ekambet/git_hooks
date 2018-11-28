@@ -1,0 +1,17 @@
+#!/bin/bash
+#
+# Pre-commit hooks
+
+# Check branch name
+BRANCH_NAME_LENGTH=`git rev-parse --abbrev-ref HEAD | grep -E '^[release|bugfix|feature]\.*' | wc -c`
+
+if [ ${BRANCH_NAME_LENGTH} -eq 0 ] ; then
+  echo -e '\E[37;44m'"\033[1mERROR\033[0m in pre-commit hook: [BranchName]
+  echo "Branch name should be start with release or bugfix or feature"
+  echo ""
+  echo "Examples:"
+  echo "-> release\10.12"
+  echo "-> feature\LoginToAppWithoutPassword"
+  echo "-> bugfix\IncorrectAgeCalculation"
+  exit 1
+fi
